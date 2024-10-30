@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	fetch "groupie-tracker/fetching"
+	"groupie-tracker/fetching"
 )
 
 type Parse struct {
@@ -14,7 +14,6 @@ type Parse struct {
 }
 
 var parsing Parse
-var data fetch.Data
 
 func init() {
 	Index, err := template.ParseFiles("template/index.html")
@@ -42,7 +41,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		parsing.ErrorTemp.Execute(w, "notFound")
 		return // Return after handling 404 error
 	}
-
+	data := fetching.Artists
 	// Use the global data variable instead of declaring a new one
 	err := parsing.Index.Execute(w, data)
 	if err != nil {

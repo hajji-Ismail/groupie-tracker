@@ -1,11 +1,12 @@
 package main
 
 import (
-	"groupie-tracker/server"
 	"net/http"
+
+	"groupie-tracker/server"
 )
- 
-func main(){
+
+func main() {
 	http.HandleFunc("/", server.Home)
-	http.ListenAndServe(":5050",nil)
+	http.ListenAndServe(":5050", nil)
 }

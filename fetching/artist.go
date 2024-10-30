@@ -1,4 +1,4 @@
-package fetch
+package fetching
 
 import (
 	"encoding/json"
@@ -9,41 +9,42 @@ import (
 	"groupie-tracker/models"
 )
 
-// fetchAPIData fetches data from the specified API URL and returns it
-type Data struct {
-    Artists *[]models.Artist
-}
-var Fetch  Data
-func FetchAPIData()  {
-	
+var Artists *[]models.Artist 
 
-	// Create a new HTTP request
-	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
+func init() {
+	var err  error
+	Artists, err = fetching("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
-		log.Printf("Error fetching data: %v", err)
-		
+		log.Fatal(err)
+	}
+	
+}
+
+func fetching(url string) (*[]models.Artist, error) { // Change return type to a slice
+	resp, err := http.Get(url)
+	if err != nil {
+		log.Println(err)
+		return nil, err // Return nil for the slice on error
 	}
 	defer resp.Body.Close()
 
-	// Check for successful response
 	if resp.StatusCode != http.StatusOK {
-		log.Printf("Error: received status code %d", resp.StatusCode)
-		
+		log.Println(resp.Status)
+		return nil, err // Return nil for the slice on non-200 response
 	}
 
-	// Read the response body
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Printf("Error reading response body: %v", err)
-		
+		log.Println(err)
+		return nil, err // Return nil for the slice on error
 	}
 
-	// Unmarshal the JSON response into the struct
-	err = json.Unmarshal(body, &Fetch.Artists)
+	var artists []models.Artist // Change to a slice of Artist
+	err = json.Unmarshal(body, &artists)
 	if err != nil {
-		log.Printf("Error unmarshalling JSON: %v", err)
-	
+		log.Println(err)
+		return nil, err // Return nil for the slice on error
 	}
 
-
+	return &artists, nil // Return the slice of artists
 }
