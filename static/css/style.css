@@ -1,0 +1,24 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    border: 0%;
+}
+body{
+    background-image: url("../img/Gemini_Generated_Image_rcxocyrcxocyrcxo.jpeg");
+    
+}
+header{
+    background-color: #f0f0f0;
+    h1{
+
+  box-shadow: 5px 5px 10px rgba(255, 1, 1, 0.5);
+    }
+}
+div{
+    display: inline-block;
+    margin: 10px;
+
+}
+h2{
+    color: aliceblue;
+}
