@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -12,7 +13,8 @@ import (
 )
 
 type Parse struct {
-	Index *template.Template
+	Index  *template.Template
+	Artist *template.Template
 
 	ErrorTemp *template.Template
 }
@@ -26,6 +28,13 @@ func init() {
 		return
 	}
 	parsing.Index = Index
+	Artist, err := template.ParseFiles("template/artist.html")
+	if err != nil {
+		log.Fatal("I can't parse the artist.html file")
+		return
+	}
+	parsing.Artist = Artist
+
 
 	ErrorTemp, err := template.ParseFiles("template/error.html")
 	if err != nil {
@@ -63,7 +72,14 @@ func GetArtistByID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Extract the artist ID from the URL
-	artistIDStr := r.URL.Path[len("/artist/"):] // Assuming the URL is like /artist/{id}
+	artistIDStr := r.URL.Query().Get("Artist")
+	artistIDStr = artistIDStr[1:]
+	fmt.Println(artistIDStr)
+	if artistIDStr == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		parsing.ErrorTemp.Execute(w, "Artist ID is required")
+		return
+	}
 	artistID, err := strconv.Atoi(artistIDStr)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -73,7 +89,9 @@ func GetArtistByID(w http.ResponseWriter, r *http.Request) {
 
 	// Fetch the artist data using the artist ID
 	var artist *models.Artist
-	artists := fetching.Artists // Assuming this is of type *[]models.Artist
+
+	artists := fetching.Artists
+
 
 	// Dereference the pointer to access the slice
 	for _, a := range *artists {
@@ -89,8 +107,9 @@ func GetArtistByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+
 	// Render the artist data using a template (you may need to create this template)
-	err = parsing.Index.Execute(w, artist) // Use a different template if necessary
+	err = parsing.Artist.Execute(w, &artist) // Use a different template if necessary
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		parsing.ErrorTemp.Execute(w, "Internal Server Error")
