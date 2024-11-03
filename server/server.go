@@ -25,13 +25,13 @@ func init() {
 	Index, err := template.ParseFiles("template/index.html")
 	if err != nil {
 		log.Fatal("I can't parse the index.html file")
-		return
+		
 	}
 	parsing.Index = Index
 	Artist, err := template.ParseFiles("template/artist.html")
 	if err != nil {
 		log.Fatal("I can't parse the artist.html file")
-		return
+		
 	}
 	parsing.Artist = Artist
 
@@ -87,6 +87,7 @@ func GetArtistByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+
 	// Fetch the artist data using the artist ID
 	var artist *models.Artist
 
@@ -106,10 +107,11 @@ func GetArtistByID(w http.ResponseWriter, r *http.Request) {
 		parsing.ErrorTemp.Execute(w, "Artist Not Found")
 		return
 	}
+	fmt.Println(artist)
 
 
 	// Render the artist data using a template (you may need to create this template)
-	err = parsing.Artist.Execute(w, &artist) // Use a different template if necessary
+	err = parsing.Artist.Execute(w, artist) // Use a different template if necessary
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		parsing.ErrorTemp.Execute(w, "Internal Server Error")

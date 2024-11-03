@@ -23,7 +23,7 @@ func init() {
 func fetching(url string) (*[]models.Artist, error) { // Change return type to a slice
 	resp, err := http.Get(url)
 	if err != nil {
-		log.Println(err)
+		
 		return nil, err // Return nil for the slice on error
 	}
 	defer resp.Body.Close()

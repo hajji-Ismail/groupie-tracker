@@ -2,18 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">*
+    <link rel="stylesheet" href="../static/css/artist.css">
     <title>Artist</title>
 </head>
 <body>
-    <img src="{{ .Images}}" alt="not found">
+    <img src="{{ .Image }}" alt="not found">
     <h1> 
-        {{ .Name}}
+        {{ .Name }}
     </h1>
-    <h1>
-        {{ .locations}}
-    </h1>
-
+  
+   <h1> 
+    {{ .Members }}
+   </h1>
+   <h1>
+    {{ .CreationDate }}
+   </h1>
+   <h1>
+    {{ .FirstAlbum }}
+   </h1>
+   <h1>
+    {{ .Locations  }}
+   </h1>
+ 
     
 </body>
 </html>
