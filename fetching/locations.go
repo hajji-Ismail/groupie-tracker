@@ -10,7 +10,7 @@ import (
 	"groupie-tracker/models"
 )
 
-var local *[]models.Location
+var local *models.Location
 
 func init() {
 	var err error
@@ -24,7 +24,7 @@ func init() {
 
 }
 
-func fetchlocal(url string) (*[]models.Location, error) {
+func fetchlocal(url string) (*models.Location, error) {
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
@@ -41,7 +41,7 @@ func fetchlocal(url string) (*[]models.Location, error) {
 		return nil, err
 	}
 
-	var loc []models.Location
+	var loc models.Location
 	err = json.Unmarshal(local, &loc)
 	if err != nil {
 		log.Println(err)
