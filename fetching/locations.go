@@ -10,24 +10,14 @@ import (
 	"groupie-tracker/models"
 )
 
-var local *models.Location
 
-func init() {
-	var err error
-	local, err = fetchlocal("https://groupietrackers.herokuapp.com/api/locations")
-	fmt.Println(local)
-	
-	if err != nil {
 
-		log.Fatal(err)
-	}
-
-}
-
-func fetchlocal(url string) (*models.Location, error) {
+func Fetchlocal(id string) (*models.Location , error)   {
+	url := "https://groupietrackers.herokuapp.com/api/locations" + "/" + id
 	resp, err := http.Get(url)
+	fmt.Println(url)
 	if err != nil {
-		return nil, err
+		return nil,err
 	}
 	defer resp.Body.Close()
 
@@ -40,6 +30,7 @@ func fetchlocal(url string) (*models.Location, error) {
 		log.Println(err)
 		return nil, err
 	}
+	fmt.Print(string(local))
 
 	var loc models.Location
 	err = json.Unmarshal(local, &loc)

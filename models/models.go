@@ -1,4 +1,14 @@
 package models
+type Data  struct {
+	Id           int      
+	Image        string   
+	Name         string   
+	Members      []string 
+	CreationDate int      
+	FirstAlbum   string 
+	Loc  []string
+
+}
 
 type Artist struct {
 	Id           int      `json:"id"`
@@ -7,7 +17,8 @@ type Artist struct {
 	Members      []string `json:"members"`
 	CreationDate int      `json:"creationDate"`
 	FirstAlbum   string   `json:"firstAlbum"`
-	Locations    string   `json:"locations"`
+	Locations    string   `json:"locationss"`
+	
 	ConcertDates string   `json:"concertDates"`
 	Relations    string   `json:"relations"`
 }

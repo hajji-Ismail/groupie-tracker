@@ -9,7 +9,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", server.Home)
-	http.HandleFunc("/Artist",server.GetArtistByID)
+	http.HandleFunc("/Artist",server.Artist)
 	http.HandleFunc("/static/" , server.ServStatic)
 	fmt.Println("the server is running on the port 5050 -->> http://localhost:5050")
 	http.ListenAndServe(":5050", nil)

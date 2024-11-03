@@ -2,28 +2,27 @@ package fetching
 
 import (
 	"encoding/json"
+	"groupie-tracker/models"
 	"io"
 	"log"
 	"net/http"
-
-	"groupie-tracker/models"
 )
 
-var Artists *[]models.Artist 
+var Artists *[]models.Artist
 
 func init() {
-	var err  error
+	var err error
 	Artists, err = fetching("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 }
 
 func fetching(url string) (*[]models.Artist, error) { // Change return type to a slice
 	resp, err := http.Get(url)
 	if err != nil {
-		
+
 		return nil, err // Return nil for the slice on error
 	}
 	defer resp.Body.Close()
