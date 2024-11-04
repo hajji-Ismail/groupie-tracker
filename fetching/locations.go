@@ -2,7 +2,7 @@ package fetching
 
 import (
 	"encoding/json"
-	"fmt"
+	
 	"io"
 	"log"
 	"net/http"
@@ -15,7 +15,7 @@ import (
 func Fetchlocal(id string) (*models.Location , error)   {
 	url := "https://groupietrackers.herokuapp.com/api/locations" + "/" + id
 	resp, err := http.Get(url)
-	fmt.Println(url)
+
 	if err != nil {
 		return nil,err
 	}
@@ -30,7 +30,7 @@ func Fetchlocal(id string) (*models.Location , error)   {
 		log.Println(err)
 		return nil, err
 	}
-	fmt.Print(string(local))
+
 
 	var loc models.Location
 	err = json.Unmarshal(local, &loc)

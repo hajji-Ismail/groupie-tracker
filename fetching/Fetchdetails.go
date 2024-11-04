@@ -18,6 +18,17 @@ func Fetchdetails( Id string) (*models.Data, error) {
 		return nil, err
 	}
 	sarout.Loc = loc.Locations
+	date,err:=  Fetchdates(Id)
+	if err != nil{
+		return nil, err
+	}
+	sarout.Date = date.Dates
+	relation ,err := Fetchrelations(Id)
+	if err != nil {
+		return nil, err
+	}
+	sarout.Datelocation = relation.Datelocation
+	
 	return &sarout, nil
 
 
