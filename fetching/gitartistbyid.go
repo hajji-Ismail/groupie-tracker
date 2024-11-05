@@ -1,17 +1,17 @@
 package fetching
 
 import (
-	"groupie-tracker/models"
-	"log"
 	"strconv"
+
+	"groupie-tracker/models"
 )
 
-func GetArtistById(idstr string) *models.Artist {
-
+func GetArtistById(idstr string) (*models.Artist, error) {
 	var artist *models.Artist
 	id, err := strconv.Atoi(idstr)
-	if err != nil {
-		log.Println("invalid Id")
+
+	if err != nil || id > 52 {
+		return nil, err
 	}
 
 	artists := Artists
@@ -25,9 +25,8 @@ func GetArtistById(idstr string) *models.Artist {
 	}
 
 	if artist == nil {
-		log.Fatal("there is no artist by the id you are giving")
-		return nil
+		return nil, err
 	}
 
-	return artist
+	return artist, nil
 }

@@ -93,7 +93,7 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 
 func ServStatic(w http.ResponseWriter, r *http.Request) {
 	// Check if the request is for the CSS directory itself
-	if r.URL.Path == "/css/" || r.URL.Path == "/css" {
+	if r.URL.Path == "/static/" || r.URL.Path == "/static" {
 		w.WriteHeader(http.StatusNotFound)
 		parsing.ErrorTemp.Execute(w, "NOT FOUND")
 		return

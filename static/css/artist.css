@@ -1,74 +1,103 @@
-*{
-    margin: 0%;
-    padding: 0%;
-    border: 0%;
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
+
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right , rgb(87, 3, 3) ,rgb(0, 0, 0));  
+    background: linear-gradient(to right, rgb(87, 3, 3), rgb(0, 0, 0));
     color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+    padding: 20px; /* Add some padding */
 }
+
 header {
     margin-bottom: 20px;
     text-align: center;
-    font-size: xx-large;
+    font-size: 2.5em; /* Adjusted font size for better readability */
 }
-img{
+
+img {
     border-radius: 50%;
-    animation: rotate 2s linear infinite
+    animation: rotate 2s linear infinite;
+    max-width: 100%; /* Ensure the image is responsive */
+    height: auto; /* Maintain aspect ratio */
 }
 
 h1 {
     font-size: 2.5em;
-
 }
 
 div {
-    
- 
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     border-radius: 10px;
     margin: 10px;
     padding: 15px;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+    width: 100%; /* Make divs full width */
+    max-width: 600px; /* Set a max-width for larger screens */
 }
 
 div:hover {
     transform: scale(1.05); /* Slightly scale up on hover */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Add shadow on hover */
 }
-audio{
-    display: none ;
+
+li {
+    list-style-type: none; /* Hide the list item dots */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    width: 100%; /* Make it responsive */
+}
+
+audio {
+    display: none;
+}
+button {
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+    color: #fff; /* White text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for the button */
+    font-size: 1.2em; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* Change background color on hover */
+    transform: scale(1.05); /* Slightly scale up on hover */
 }
 
 
 
-/* Add a media query for responsiveness */
+
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2em;
+    header {
+        font-size: 2em; /* Smaller header on smaller screens */
     }
 
-    h2 {
-        font-size: 1.2em;
+    h1 {
+        font-size: 2em; /* Smaller h1 on smaller screens */
     }
 
     div {
-        margin: 5px;
-        padding: 10px;
+        padding: 10px; /* Reduce padding in divs on smaller screens */
     }
 }
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
+
+@media (max-width: 480px) {
+    header {
+        font-size: 1.5em; /* Further reduce header size on very small screens */
     }
-    to {
-        transform: rotate(360deg);
+
+    h1 {
+        font-size: 1.5em; /* Further reduce h1 size */
     }
 }
