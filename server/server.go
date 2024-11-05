@@ -77,8 +77,8 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 	}
 	Artist, err := fetching.Fetchdetails(artistIDStr) 
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		parsing.ErrorTemp.Execute(w, "Internal Server Error")
+		w.WriteHeader(http.StatusBadRequest)
+		parsing.ErrorTemp.Execute(w, "Bad Request")
 		return
 	}
 
