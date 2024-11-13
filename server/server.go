@@ -19,26 +19,31 @@ type Parse struct {
 var parsing Parse
 
 func init() {
-	// Use the helper function to ensure the path is correct
-	Index, err := template.ParseFiles("/home/ihajji/Desktop/groupie-tracker/template/index.html")
+	// Get the current working directory (project root directory)
+	wd, err := os.Getwd()
+	if err != nil {
+		log.Fatalf("Error getting working directory: %v", err)
+	}
+
+	// Build the absolute path using the working directory
+	Index, err := template.ParseFiles(wd + "/template/index.html")
 	if err != nil {
 		log.Fatalf("Error parsing index.html: %v", err)
 	}
 	parsing.Index = Index
 
-	Artist, err := template.ParseFiles("/home/ihajji/Desktop/groupie-tracker/template/artist.html")
+	Artist, err := template.ParseFiles(wd + "/template/artist.html")
 	if err != nil {
 		log.Fatalf("Error parsing artist.html: %v", err)
 	}
 	parsing.Artist = Artist
 
-	ErrorTemp, err := template.ParseFiles("/home/ihajji/Desktop/groupie-tracker/template/error.html")
+	ErrorTemp, err := template.ParseFiles(wd + "/template/error.html")
 	if err != nil {
 		log.Fatalf("Error parsing error.html: %v", err)
 	}
 	parsing.ErrorTemp = ErrorTemp
 }
-
 func Home(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
