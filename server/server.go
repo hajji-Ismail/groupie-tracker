@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 
 	"groupie-tracker/fetching"
 )
@@ -18,24 +19,28 @@ type Parse struct {
 
 var parsing Parse
 
-func init() {
-	Index, err := template.ParseFiles("template/index.html")
-	if err != nil {
-		log.Fatal("I can't parse the index.html file")
+func getTemplatePath(filename string) string {
+	// This ensures templates are looked for from the root of the project
+	return filepath.Join("..", "template", filename)
+}
 
+func init() {
+	// Use the helper function to ensure the path is correct
+	Index, err := template.ParseFiles(getTemplatePath("index.html"))
+	if err != nil {
+		log.Fatalf("Error parsing index.html: %v", err)
 	}
 	parsing.Index = Index
-	Artist, err := template.ParseFiles("template/artist.html")
-	if err != nil {
-		log.Fatal("I can't parse the artist.html file")
 
+	Artist, err := template.ParseFiles(getTemplatePath("artist.html"))
+	if err != nil {
+		log.Fatalf("Error parsing artist.html: %v", err)
 	}
 	parsing.Artist = Artist
 
-	ErrorTemp, err := template.ParseFiles("template/error.html")
+	ErrorTemp, err := template.ParseFiles(getTemplatePath("error.html"))
 	if err != nil {
-		log.Fatal("I can't parse the error.html file")
-		return
+		log.Fatalf("Error parsing error.html: %v", err)
 	}
 	parsing.ErrorTemp = ErrorTemp
 }
@@ -75,7 +80,7 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 		parsing.ErrorTemp.Execute(w, "Artist ID is required")
 		return
 	}
-	Artist, err := fetching.Fetchdetails(artistIDStr) 
+	Artist, err := fetching.Fetchdetails(artistIDStr)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		parsing.ErrorTemp.Execute(w, "Bad Request")
@@ -88,7 +93,6 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 		parsing.ErrorTemp.Execute(w, "Internal Server Error")
 		return
 	}
-
 }
 
 func ServStatic(w http.ResponseWriter, r *http.Request) {

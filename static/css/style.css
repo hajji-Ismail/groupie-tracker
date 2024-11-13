@@ -1,4 +1,4 @@
-/* Reset some default styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -30,33 +30,33 @@ h1 {
 
 main {
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    justify-content: center; /* Center the items horizontally */
-    align-items: center; /* Center the items vertically */
-    height: 100%; /* Fill the available space */
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100%; 
     padding: 20px;
 }
 
 div {
-  justify-content: center; /* Center the items horizontally */
+  justify-content: center;
   align-items: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5); 
     border-radius: 10px;
     margin: 10px;
     padding: 15px;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+    transition: transform 0.3s, box-shadow 0.3s; 
 }
 
 div:hover {
-    transform: scale(1.05); /* Slightly scale up on hover */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Add shadow on hover */
+    transform: scale(1.05); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); 
 }
 
 img {
     max-width: 100%;
     height: auto;
-    border-radius: 10px; /* Rounded corners for images */
+    border-radius: 10px; 
 }
 
 h2 {
@@ -67,10 +67,10 @@ h2 {
 
 .Artist {
     text-decoration: none;
-    color: inherit; /* Inherit color from parent */
+    color: inherit; 
 }
 
-/* Add a media query for responsiveness */
+
 @media (max-width: 768px) {
     h1 {
         font-size: 2em;
