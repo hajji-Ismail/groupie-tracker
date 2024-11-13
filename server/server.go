@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 
 	"groupie-tracker/fetching"
 )
@@ -19,26 +18,21 @@ type Parse struct {
 
 var parsing Parse
 
-func getTemplatePath(filename string) string {
-	// This ensures templates are looked for from the root of the project
-	return filepath.Join("..", "template", filename)
-}
-
 func init() {
 	// Use the helper function to ensure the path is correct
-	Index, err := template.ParseFiles(getTemplatePath("index.html"))
+	Index, err := template.ParseFiles("/home/ihajji/Desktop/groupie-tracker/template/index.html")
 	if err != nil {
 		log.Fatalf("Error parsing index.html: %v", err)
 	}
 	parsing.Index = Index
 
-	Artist, err := template.ParseFiles(getTemplatePath("artist.html"))
+	Artist, err := template.ParseFiles("/home/ihajji/Desktop/groupie-tracker/template/artist.html")
 	if err != nil {
 		log.Fatalf("Error parsing artist.html: %v", err)
 	}
 	parsing.Artist = Artist
 
-	ErrorTemp, err := template.ParseFiles(getTemplatePath("error.html"))
+	ErrorTemp, err := template.ParseFiles("/home/ihajji/Desktop/groupie-tracker/template/error.html")
 	if err != nil {
 		log.Fatalf("Error parsing error.html: %v", err)
 	}

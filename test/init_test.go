@@ -11,32 +11,31 @@ import (
 
 
 
-func HomeTest(t *testing.T) {
-	serving := httptest.NewServer(http.HandlerFunc(server.Home))
+func TestQuen(t *testing.T) {
+	req := httptest.NewRequest("GET", "/artist?Artist=1", nil) 
+	w := httptest.NewRecorder()
 
-	req := httptest.NewRequest("GET", serving.URL, nil)
-	res, err := http.DefaultClient.Do(req)
-	if err != nil {
-		t.Error(err)
+	handler := http.HandlerFunc(server.Artist)
+	handler.ServeHTTP(w, req)
+
+	if w.Code != http.StatusOK {
+		t.Errorf("Expected status 200 OK, got %d", w.Code)
 	}
 
-	if res.StatusCode != http.StatusOK {
-		t.Errorf("expected status code %d got %d", http.StatusOK, res.StatusCode)
-	}
-	if res.Request.Method != http.MethodGet {
-		t.Errorf("expected method %s got %s", http.MethodGet, res.Request.Method)
+	expected := []string{"Freddie Mercury", "Brian May", "John Daecon", "Roger Meddows-Taylor", "Mike Grose", "Barry Mitchell", "Doug Fogie"}
+	for _, val := range expected {
+		if !contains(w.Body.String(), val) {
+			t.Errorf("Expected body to contain %s, got %s", val, w.Body.String())
+		}
 	}
 }
 
 
-func TestArtistHandler(t *testing.T) {
-	// Replace the real Fetchdetails function with the mock
 
-	// Create a new request to test the Artist handler
-	req := httptest.NewRequest("GET", "/artist?Artist=1", nil) // artist ID is 1
+func TestGorillaz(t *testing.T) {
+	req := httptest.NewRequest("GET", "/artist?Artist=39", nil) 
 	w := httptest.NewRecorder()
 
-	// Call the Artist handler
 	handler := http.HandlerFunc(server.Artist)
 	handler.ServeHTTP(w, req)
 
@@ -45,14 +44,53 @@ func TestArtistHandler(t *testing.T) {
 		t.Errorf("Expected status 200 OK, got %d", w.Code)
 	}
 
+	expected :="26-03-2001"
 	
-	expected := "Queen" 
-	if !contains(w.Body.String(), expected) {
-		t.Errorf("Expected body to contain %s, got %s", expected, w.Body.String())
+		if !contains(w.Body.String(),expected ) {
+			t.Errorf("Expected body to contain %s, got %s", expected, w.Body.String())
+		}
+	
+}
+func TestTravis(t *testing.T){
+	req := httptest.NewRequest("GET", "/artist?Artist=30", nil) 
+	w := httptest.NewRecorder()
+
+	handler := http.HandlerFunc(server.Artist)
+	handler.ServeHTTP(w, req)
+
+	// Check if the response code is correct (200 OK)
+	if w.Code != http.StatusOK {
+		t.Errorf("Expected status 200 OK, got %d", w.Code)
+	}
+
+	expected := []string{"santiago-chile","sao_paulo-brazil","los_angeles-usa","houston-usa","atlanta-usa","new_orleans-usa","philadelphia-usa","london-uk","frauenfeld-switzerland","turku-finland"}
+	for _, val := range expected {
+		if !contains(w.Body.String(), val) {
+			t.Errorf("Expected body to contain %s, got %s", val, w.Body.String())
+		}
+	}
+}
+func TestFOO(t *testing.T) {
+	req := httptest.NewRequest("GET", "/artist?Artist=51", nil) 
+	w := httptest.NewRecorder()
+
+	handler := http.HandlerFunc(server.Artist)
+	handler.ServeHTTP(w, req)
+
+	// Check if the response code is correct (200 OK)
+	if w.Code != http.StatusOK {
+		t.Errorf("Expected status 200 OK, got %d", w.Code)
+	}
+
+	expected := []string{"Dave Grohl","Nate Mendel","Taylor Hawkins","Chris Shiflett","Chris Shiflett" ,"Pat Smear","Rami Jaffee"}
+
+	for _, val := range expected {
+		if !contains(w.Body.String(), val) {
+			t.Errorf("Expected body to contain %s, got %s", expected, w.Body.String())
+		}
 	}
 }
 
-// Utility function to check if the response body contains a substring
 func contains(body string, expected string) bool {
 	return strings.Contains(body, expected)
 }
