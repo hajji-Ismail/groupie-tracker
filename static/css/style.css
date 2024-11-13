@@ -5,19 +5,81 @@
     box-sizing: border-box;
 }
 
+    
+    
+
+    
+
+
+
 body {
-    font-family: Arial, sans-serif;
-    background-image: url("../img/Gemini_Generated_Image_rcxocyrcxocyrcxo.jpeg");
+    font-family: 'Arial', sans-serif;
+    background-image: url("../img/Gemini_Generated_Image_rcxocyrcxocyrcxo.jpeg"); /* Replace with your background image */
     background-size: cover;
     background-position: center;
     color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    
+    justify-content: flex-start;
+    min-height: 100vh;
 }
 
+header {
+    margin: 20px 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.filter-button {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    width: 90%;
+    max-width: 600px;
+}
+
+.filter-button h2 {
+    margin-bottom: 10px;
+}
+
+.members {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="checkbox"] {
+    accent-color: #ff5722; /* Change checkbox color */
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.artist-card {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3
+}
 header {
     margin-bottom: 20px;
     text-align: center;
