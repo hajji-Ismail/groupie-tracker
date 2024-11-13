@@ -1,4 +1,4 @@
-package test
+package server
 
 import (
 	"net/http"
@@ -9,10 +9,8 @@ import (
 	"groupie-tracker/server"
 )
 
-
-
 func TestQuen(t *testing.T) {
-	req := httptest.NewRequest("GET", "/artist?Artist=1", nil) 
+	req := httptest.NewRequest("GET", "/artist?Artist=1", nil)
 	w := httptest.NewRecorder()
 
 	handler := http.HandlerFunc(server.Artist)
@@ -30,10 +28,8 @@ func TestQuen(t *testing.T) {
 	}
 }
 
-
-
 func TestGorillaz(t *testing.T) {
-	req := httptest.NewRequest("GET", "/artist?Artist=39", nil) 
+	req := httptest.NewRequest("GET", "/artist?Artist=39", nil)
 	w := httptest.NewRecorder()
 
 	handler := http.HandlerFunc(server.Artist)
@@ -44,15 +40,15 @@ func TestGorillaz(t *testing.T) {
 		t.Errorf("Expected status 200 OK, got %d", w.Code)
 	}
 
-	expected :="26-03-2001"
-	
-		if !contains(w.Body.String(),expected ) {
-			t.Errorf("Expected body to contain %s, got %s", expected, w.Body.String())
-		}
-	
+	expected := "26-03-2001"
+
+	if !contains(w.Body.String(), expected) {
+		t.Errorf("Expected body to contain %s, got %s", expected, w.Body.String())
+	}
 }
-func TestTravis(t *testing.T){
-	req := httptest.NewRequest("GET", "/artist?Artist=30", nil) 
+
+func TestTravis(t *testing.T) {
+	req := httptest.NewRequest("GET", "/artist?Artist=30", nil)
 	w := httptest.NewRecorder()
 
 	handler := http.HandlerFunc(server.Artist)
@@ -63,15 +59,16 @@ func TestTravis(t *testing.T){
 		t.Errorf("Expected status 200 OK, got %d", w.Code)
 	}
 
-	expected := []string{"santiago-chile","sao_paulo-brazil","los_angeles-usa","houston-usa","atlanta-usa","new_orleans-usa","philadelphia-usa","london-uk","frauenfeld-switzerland","turku-finland"}
+	expected := []string{"santiago-chile", "sao_paulo-brazil", "los_angeles-usa", "houston-usa", "atlanta-usa", "new_orleans-usa", "philadelphia-usa", "london-uk", "frauenfeld-switzerland", "turku-finland"}
 	for _, val := range expected {
 		if !contains(w.Body.String(), val) {
 			t.Errorf("Expected body to contain %s, got %s", val, w.Body.String())
 		}
 	}
 }
+
 func TestFOO(t *testing.T) {
-	req := httptest.NewRequest("GET", "/artist?Artist=51", nil) 
+	req := httptest.NewRequest("GET", "/artist?Artist=51", nil)
 	w := httptest.NewRecorder()
 
 	handler := http.HandlerFunc(server.Artist)
@@ -82,7 +79,7 @@ func TestFOO(t *testing.T) {
 		t.Errorf("Expected status 200 OK, got %d", w.Code)
 	}
 
-	expected := []string{"Dave Grohl","Nate Mendel","Taylor Hawkins","Chris Shiflett","Chris Shiflett" ,"Pat Smear","Rami Jaffee"}
+	expected := []string{"Dave Grohl", "Nate Mendel", "Taylor Hawkins", "Chris Shiflett", "Chris Shiflett", "Pat Smear", "Rami Jaffee"}
 
 	for _, val := range expected {
 		if !contains(w.Body.String(), val) {

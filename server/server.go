@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
+	"strings"
 
 	"groupie-tracker/fetching"
 )
@@ -19,31 +21,40 @@ type Parse struct {
 var parsing Parse
 
 func init() {
-	// Get the current working directory (project root directory)
-	wd, err := os.Getwd()
+	// Get the current working directory
+	workingDir, err := os.Getwd()
+	if strings.HasSuffix(workingDir, "/test") {
+		workingDir = strings.TrimSuffix(workingDir, "/test")
+	}
 	if err != nil {
-		log.Fatalf("Error getting working directory: %v", err)
+		log.Fatalf("Error getting current working directory: %v", err)
 	}
 
-	// Build the absolute path using the working directory
-	Index, err := template.ParseFiles(wd + "/template/index.html")
+	// Construct the absolute path for index.html
+	indexPath := filepath.Join(workingDir, "template", "index.html")
+	Index, err := template.ParseFiles(indexPath)
 	if err != nil {
 		log.Fatalf("Error parsing index.html: %v", err)
 	}
 	parsing.Index = Index
 
-	Artist, err := template.ParseFiles(wd + "/template/artist.html")
+	// Construct the absolute path for artist.html
+	artistPath := filepath.Join(workingDir, "template", "artist.html")
+	Artist, err := template.ParseFiles(artistPath)
 	if err != nil {
 		log.Fatalf("Error parsing artist.html: %v", err)
 	}
 	parsing.Artist = Artist
 
-	ErrorTemp, err := template.ParseFiles(wd + "/template/error.html")
+	// Construct the absolute path for error.html
+	errorPath := filepath.Join(workingDir, "template", "error.html")
+	ErrorTemp, err := template.ParseFiles(errorPath)
 	if err != nil {
 		log.Fatalf("Error parsing error.html: %v", err)
 	}
 	parsing.ErrorTemp = ErrorTemp
 }
+
 func Home(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
