@@ -5,7 +5,7 @@ type FilterRequest struct {
 	CreationTo   string `json:"creationDateTo"`
 	AlbumFrom    string `json:"firstAlbumFrom"`
 	AlbumTo      string `json:"firstAlbumTo"`
-	Members      string `json:"members"`
+	Members      []string `json:"members"`
 	ConcertDate  string `json:"concertDates"`
 }
 // filed to filter

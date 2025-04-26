@@ -165,33 +165,55 @@ function displayArtistDetails(data) {
 //////////////////////////////////////////////////////////
 
 function setupFilters() {
+  
   const form = document.getElementById("filter-form");
+  const bottoms = document.getElementById("buttons")
+let filters = {}
+  bottoms.addEventListener("click", async (e) => {
+ if (e.target.id === "submit") {
+  filters = {
+    creationDateFrom: touchedInputs.has("creation-from")
+      ? form.querySelector('input[name="creation-from"]').value
+      : "0",
+    creationDateTo: touchedInputs.has("creation-to")
+      ? form.querySelector('input[name="creation-to"]').value
+      : "0",
+    firstAlbumFrom: touchedInputs.has("album-from")
+      ? form.querySelector('input[name="album-from"]').value
+      : "0",
+    firstAlbumTo: touchedInputs.has("album-to")
+      ? form.querySelector('input[name="album-to"]').value
+      : "0",
+    members:
+    Array.from(form.querySelectorAll('input[name="members"]:checked')).map(input => input.value),
+    concertDates: form.querySelector("#location-input")?.value.trim() || "",
+  };
+} else if (e.target.id === "reset") {
+  filters = {
+    creationDateFrom: "0",
+    creationDateTo: "0",
+    firstAlbumFrom: "0",
+    firstAlbumTo: "0",
+    members: [],
+    concertDates: "",
+  
+  };
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  touchedInputs.clear()
+  updateRangeValues()
+  const span = document.querySelectorAll(".span")
+  span.forEach(label =>{
+    label.innerHTML = "1900"
+  })
+  const span1 = document.querySelectorAll(".span1")
+  span1.forEach(label =>{
+    label.innerHTML = "2025"
+  })
+ 
+  
 
-    const filters = {
-      creationDateFrom: touchedInputs.has("creation-from")
-        ? form.querySelector('input[name="creation-from"]').value
-        : "0",
+}
 
-      creationDateTo: touchedInputs.has("creation-to")
-        ? form.querySelector('input[name="creation-to"]').value
-        : "0",
-
-      firstAlbumFrom: touchedInputs.has("album-from")
-        ? form.querySelector('input[name="album-from"]').value
-        : "0",
-
-      firstAlbumTo: touchedInputs.has("album-to")
-        ? form.querySelector('input[name="album-to"]').value
-        : "0",
-
-      members:
-        form.querySelector('input[name="members"]:checked')?.value || "0",
-
-      concertDates: form.querySelector("#location-input")?.value.trim() || "",
-    };
 
     try {
       const res = await fetch("http://localhost:8080/api/artists/filter", {

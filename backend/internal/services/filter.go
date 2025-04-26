@@ -24,18 +24,18 @@ func (s *FilterService) Filter(data models.FilterRequest) ([]models.Artist, erro
 	creationTo, err2 := strconv.Atoi(data.CreationTo)
 	albumFrom, err3 := strconv.Atoi(data.AlbumFrom)
 	albumTo, err4 := strconv.Atoi(data.AlbumTo)
-	members, err5 := strconv.Atoi(data.Members)
+	MembersArr := []int{}
+	for _, member := range data.Members {
+		mem, err := strconv.Atoi(member)
+		if err != nil {
+			return nil, fmt.Errorf("error parsing number atoi error")
+		}
+		MembersArr = append(MembersArr, mem)
 
-	if err1 != nil || err2 != nil || err3 != nil || err4 != nil || err5 != nil {
+	}
+
+	if err1 != nil || err2 != nil || err3 != nil || err4 != nil {
 		return nil, fmt.Errorf("error parsing number atoi error")
-	}
-	trick := false
-	tric2 := false
-	if creationFrom == 0 && creationTo == 0 && members != 0 && albumFrom != 0 && albumTo != 0 && data.ConcertDate == "" {
-		trick = true
-	}
-	if creationFrom == 0 && creationTo == 0 && members != 0 && albumFrom == 0 && albumTo == 0 && data.ConcertDate != "" {
-		tric2 = true
 	}
 
 	for _, artist := range s.Store.Artists {
@@ -73,19 +73,18 @@ func (s *FilterService) Filter(data models.FilterRequest) ([]models.Artist, erro
 		}
 
 		// Members filter
-		if members != 0 {
-			if trick {
-				if len(artist.Members) > members {
-					isMatch = false
+
+		// Members filter
+		if len(MembersArr) != 0 {
+			matchFound := false
+			for _, val := range MembersArr {
+				if len(artist.Members) == val {
+					matchFound = true
+					break
 				}
-			} else if tric2 {
-				if len(artist.Members) < members {
-					isMatch = false
-				}
-			} else {
-				if len(artist.Members) != members {
-					isMatch = false
-				}
+			}
+			if !matchFound {
+				isMatch = false
 			}
 		}
 

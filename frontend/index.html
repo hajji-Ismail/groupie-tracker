@@ -30,20 +30,20 @@
           <!-- Creation Date -->
           <div class="filter-item">
             <h3>Creation Date</h3>
-            <label for="creation-from">From: <span id="creation-from-value">1900</span></label>
+            <label for="creation-from">From: <span id="creation-from-value" class="span">1900</span></label>
             <input type="range" id="creation-from" name="creation-from" min="1900" max="2025" step="1" value="0">
 
-            <label for="creation-to">To: <span id="creation-to-value">2025</span></label>
+            <label for="creation-to">To: <span id="creation-to-value" class="span1">2025</span></label>
             <input type="range" id="creation-to" name="creation-to" min="1900" max="2025" step="1" value="0">
           </div>
 
           <!-- First Album -->
           <div class="filter-item">
             <h3>First Album</h3>
-            <label for="album-from">From: <span id="album-from-value">1900</span></label>
+            <label for="album-from">From: <span id="album-from-value"  class="span">1900</span></label>
             <input type="range" id="album-from" name="album-from" min="1900" max="2025" step="1" value="0">
 
-            <label for="album-to">To: <span id="album-to-value">2025</span></label>
+            <label for="album-to">To: <span id="album-to-value" class="span1">2025</span></label>
             <input type="range" id="album-to" name="album-to" min="1900" max="2025" step="1" value="0">
           </div>
 
@@ -58,22 +58,22 @@
           <div class="filter-item">
             <h2>Number Of Mumbers</h2>
             <div class="checkbox-group">
-              <label><input type="radio" name="members" value="1" /> 1</label>
-              <label><input type="radio" name="members" value="2" /> 2</label>
-              <label><input type="radio" name="members" value="3" /> 3</label>
-              <label><input type="radio" name="members" value="4" /> 4</label>
-              <label><input type="radio" name="members" value="5" /> 5</label>
-              <label><input type="radio" name="members" value="6" /> 6</label>
-              <label><input type="radio" name="members" value="7" /> 7</label>
-              <label><input type="radio" name="members" value="8" /> 8</label>
-              <label><input type="radio" name="members" value="9" /> 9</label>
+              <label><input type="checkbox" name="members" value="1" /> 1</label>
+              <label><input type="checkbox" name="members" value="2" /> 2</label>
+              <label><input type="checkbox" name="members" value="3" /> 3</label>
+              <label><input type="checkbox" name="members" value="4" /> 4</label>
+              <label><input type="checkbox" name="members" value="5" /> 5</label>
+              <label><input type="checkbox" name="members" value="6" /> 6</label>
+              <label><input type="checkbox" name="members" value="7" /> 7</label>
+              <label><input type="checkbox" name="members" value="8" /> 8</label>
+              <label><input type="checkbox" name="members" value="9" /> 9</label>
             </div>
           </div>
         </div>
         <!-- Filter Buttons -->
-        <div class="filter-item actions">
-          <button type="reset">Reset</button>
-          <button type="submit">Apply Filters</button>
+        <div id="buttons"  class="filter-item actions">
+          <button id="reset" type="reset">Reset</button>
+          <button  id="submit" type="reset">Apply Filters</button>
         </div>
       </form>
     </section>
