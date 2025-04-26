@@ -1,0 +1,131 @@
+.search-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 1rem auto;
+    padding: 0 1rem;
+    position: relative;
+    display: flex;
+    gap: 50px;
+    justify-content:flex-start ;
+    position: relative;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 5px 30px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 2rem;
+    background-color: var(--color-primary-dark);
+    color: #fff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  
+  .search-input::placeholder {
+    color: #aaa;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    background-color: var(--color-primary-dark);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  .search-container::before {
+ 
+    position: absolute;
+    top: 50%;
+    left: 1.5rem;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #999;
+    pointer-events: none;
+  }
+
+
+.suggestions-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.suggestions-box li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions-box li:hover {
+  background-color: #f0f0f0;
+}
+.suggestions-box {
+  position: absolute;
+  top: 100%; /* right under the search input */
+  left: 25%;
+  width: 50%;
+  background-color: var(--color-primary-dark);
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 200px;     /* scroll limit */
+  overflow-y: auto;      /* scroll if too many suggestions */
+  z-index: 999;          /* stay on top of cards */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.suggestions-box ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.suggestions-box li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions-box li:hover {
+  background-color:  rgb(28, 94, 218);;
+}
+.suggestions-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.suggestions-box::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.suggestions-box::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.suggestions-box::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+  @media (max-width: 768px) {
+    .search-input {
+      font-size: 0.95rem;
+      padding-left: 2.25rem;
+    }
+  
+    .search-container::before {
+      left: 1.25rem;
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .search-input {
+      font-size: 0.9rem;
+      padding-left: 2rem;
+    }
+  
+    .search-container::before {
+      left: 1rem;
+      font-size: 0.85rem;
+    }
+  }
+  

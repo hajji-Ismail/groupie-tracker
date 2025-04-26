@@ -1,0 +1,57 @@
+@import url(variables.css);
+@import url(header.css);
+@import url(filters.css);
+@import url(container.css);
+@import url(footer.css);
+@import url(error.css);
+@import url(search.css);
+
+* {
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+input[type="radio"] {
+    appearance: none;
+    /* -webkit-appearance: none; */
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-primary, #555);
+    background-color: white;
+    border-radius: 4px;
+    /* Make it square instead of round */
+    display: inline-block;
+    position: relative;
+    transition: 0.2s ease-in-out;
+}
+
+input[type="radio"]:checked {
+    background-color: var(--color-primary, #555);
+}
+#theme {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#theme:hover {
+    transform: scale(1.1);
+}
+
+/* Karanlık Tema */
+body.dark-mode {
+    background-color: #121212;
+    color: rgb(56, 49, 49);
+}
+
+body.dark-mode #theme {
+    content: '🌞'; /* Güneş ikonu */
+}

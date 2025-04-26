@@ -1,0 +1,13 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px var(--side-Pading);
+    background-color: var(--color-primary-dark);
+    box-shadow: var(--shadow-default);
+    font-family: var(--font-primary);
+    color: var(--color-primary);
+    a{
+        color: rgb(28, 94, 218);
+    }
+}

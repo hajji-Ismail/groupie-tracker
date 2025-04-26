@@ -1,0 +1,138 @@
+#filters {
+    padding: 20px var(--side-Pading);
+   
+}
+#filters > h2 {
+    font-family: var(--color-primary);
+    color: var(--color-primary);
+    padding: 5px;
+}
+
+.filter-group {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    /* background-color: red; */
+    /* this for small devices*/
+    /* display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    align-items: center;
+    padding: 1rem; */
+}
+
+/* //////////////////////////////////////// */
+#filter-form {
+    width: 100%;
+}
+
+.filter-group {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.filter-item {
+    background-color: #cbcccd;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.actions{
+    margin-top: 5px;
+   
+}
+
+.filter-item h3,
+.filter-item h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    color: var(--color-gray);
+}
+
+.filter-item label {
+    font-size: 0.95rem;
+    color: var(--color-gray);
+   
+}
+
+.filter-item input[type="range"] {
+    width: 100%;
+    accent-color: var(--color-primary);
+}
+
+#location-input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    gap: 0.25rem;
+}
+
+.checkbox-group label {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.filter-item button {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.filter-item button[type="submit"] {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.filter-item button[type="reset"] {
+    background-color: var(--color-accent);
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.filter-item button:hover {
+    opacity: 0.9;
+}
+#filters {
+ 
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+  }
+  
+  #filters.hidden {
+  
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  #toggle-filters{
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--color-primary);
+    padding: 10px;
+    color:#fff;
+    
+  }
+  
+
+
+@media (max-width: 768px) {
+    .filter-group {
+        grid-template-columns: 1fr;
+    }
+}

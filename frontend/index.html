@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <title>Groupie-Tracker Filters</title>
+  <script defer  src="./js/main.js"></script>
+</head>
+
+<body class="light">
+  <!-- Default to light mode -->
+  <header>
+    <h1><a href="index.html">G-Tracker</a></h1>
+    <button id="theme">🌙</button>
+  </header>
+  <main>
+    <div class="search-container">
+      <button id="toggle-filters" ><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/></svg></button>
+      <input type="search" class="search-input" name="search" placeholder="Search..."  id="search"/>
+      <div id="suggestions" class="suggestions-box"></div>
+    </div>
+   
+
+    <section id="filters" class="hidden">
+      <h2>Filter Artists</h2>
+      <form id="filter-form" method="POST">
+        <div class="filter-group">
+          <!-- Creation Date -->
+          <div class="filter-item">
+            <h3>Creation Date</h3>
+            <label for="creation-from">From: <span id="creation-from-value">1900</span></label>
+            <input type="range" id="creation-from" name="creation-from" min="1900" max="2025" step="1" value="0">
+
+            <label for="creation-to">To: <span id="creation-to-value">2025</span></label>
+            <input type="range" id="creation-to" name="creation-to" min="1900" max="2025" step="1" value="0">
+          </div>
+
+          <!-- First Album -->
+          <div class="filter-item">
+            <h3>First Album</h3>
+            <label for="album-from">From: <span id="album-from-value">1900</span></label>
+            <input type="range" id="album-from" name="album-from" min="1900" max="2025" step="1" value="0">
+
+            <label for="album-to">To: <span id="album-to-value">2025</span></label>
+            <input type="range" id="album-to" name="album-to" min="1900" max="2025" step="1" value="0">
+          </div>
+
+
+          <!-- Locations Input -->
+          <div class="filter-item">
+            <h2>Concert Date</h2>
+            <input type="text" id="location-input" name="location" placeholder="e.g., Paris, London" />
+          </div>
+
+          <!-- Number of Members -->
+          <div class="filter-item">
+            <h2>Number Of Mumbers</h2>
+            <div class="checkbox-group">
+              <label><input type="radio" name="members" value="1" /> 1</label>
+              <label><input type="radio" name="members" value="2" /> 2</label>
+              <label><input type="radio" name="members" value="3" /> 3</label>
+              <label><input type="radio" name="members" value="4" /> 4</label>
+              <label><input type="radio" name="members" value="5" /> 5</label>
+              <label><input type="radio" name="members" value="6" /> 6</label>
+              <label><input type="radio" name="members" value="7" /> 7</label>
+              <label><input type="radio" name="members" value="8" /> 8</label>
+              <label><input type="radio" name="members" value="9" /> 9</label>
+            </div>
+          </div>
+        </div>
+        <!-- Filter Buttons -->
+        <div class="filter-item actions">
+          <button type="reset">Reset</button>
+          <button type="submit">Apply Filters</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="container">
+      <!-- Artist cards will render here -->
+    </section>
+    <div id="actions"></div>
+  </main>
+  
+</body>
+
+</html>
